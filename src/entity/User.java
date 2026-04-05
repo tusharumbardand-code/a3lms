@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class User {
@@ -8,6 +9,15 @@ public class User {
 	private String type;
 	private String userId;
 	private String password;
+	private ArrayList<Book> usersBookList = new ArrayList<>();
+
+	public ArrayList<Book> getUsersBookList() {
+		return usersBookList;
+	}
+
+	public void setUsersBookList(ArrayList<Book> usersBookList) {
+		this.usersBookList = usersBookList;
+	}
 
 	public User(String name, String type, String userId, String password) {
 		super();
