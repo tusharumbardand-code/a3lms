@@ -16,13 +16,7 @@ public class BookView {
 			int op = Input.getScanner().nextInt();
 			switch (op) {
 			case 1: {
-				Book newBook = inputForBookAdd();
-				boolean isAdded = bookService.addBook(newBook);
-				if (isAdded) {
-					System.out.println("BOOK IS ADDED");
-				} else {
-					System.out.println("BOOK WITH SAME ID IS PRESENT");
-				}
+				
 			}
 				break;
 			case 2: {

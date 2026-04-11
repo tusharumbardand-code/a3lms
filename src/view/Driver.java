@@ -18,14 +18,20 @@ public class Driver {
 	}
 
 	public static void runApp() {
-		System.out.println("1.LOGIN \n2.SIGNIN");
-		int op = Input.getScanner().nextInt();
-		if (op == 1) {
-			logIn();
-		} else if (op == 2) {
-			signIn();
-		} else {
-			System.out.println("INVALID INPUT");
+		while(true) {
+			System.out.println("1.LOGIN \n2.SIGNIN\n3.EXIT");
+			int op = Input.getScanner().nextInt();
+			if (op == 1) {
+				logIn();
+			} else if (op == 2) {
+				signIn();
+			}else if(op==3) {
+				System.out.println("THANK YOU");
+				return;
+			}
+			else {
+				System.out.println("INVALID INPUT");
+			}
 		}
 	}
 
@@ -75,7 +81,62 @@ public class Driver {
 
 	private static void librarianView() {
 
-		System.out.println("librarianView");
+		while (true) {
+			System.out.println(
+					"1.ADD BOOK \n2.SEARCH BOOK BY NAME \n3.SHOW ALL USERS \n4.SHOW ALL BOOKS \n5.REMOVE BOOK BY NAME \n6.EXIT");
+			int op = Input.getScanner().nextInt();
+			switch (op) {
+			case 1: {
+				Book newBook = BookView.inputForBookAdd();
+				boolean isAdded = bookService.addBook(newBook);
+				if (isAdded) {
+					System.out.println("BOOK IS ADDED");
+				} else {
+					System.out.println("BOOK WITH SAME ID IS PRESENT");
+				}
+			}
+				break;
+			case 2: {
+				Input.getScanner().nextLine();
+				System.out.println("ENTER BOOK NAME");
+				String name = Input.getScanner().nextLine();
+				Book book = bookService.findBookByName(name);
+				if (book == null) {
+					System.out.println("BOOK IS NOT PRESENT");
+				} else {
+					System.out.println(book);
+				}
+			}
+				break;
+			case 3: {
+				System.out.println("====ALL USERS====");
+				userService.getAllusers().forEach(user -> System.out.println(user));
+			}
+				break;
+			case 4: {
+				bookService.getAllBooks().forEach(book -> System.out.println(book));
+			}
+				break;
+			case 5: {
+				Input.getScanner().nextLine();
+				System.out.println("ENTER BOOK NAME");
+				String name = Input.getScanner().nextLine();
+				Book bookToRemoved = bookService.findBookByName(name);
+				if (bookToRemoved == null) {
+					System.out.println("BOOK IS NOT PRESENT");
+				} else {
+					bookService.removeBook(bookToRemoved.getId());
+					System.out.println("BOOK IS REMOVED");
+					System.out.println(bookToRemoved);
+				}
+			}
+				break;
+			case 6: {
+				System.out.println("EXIT");
+				return;
+			}
+			}
+		}
 
 	}
 
